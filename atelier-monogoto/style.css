@@ -637,3 +637,60 @@ img { display: block; width: 100%; }
   .footer__inner { flex-direction: column; gap: var(--space-l); }
   .footer__nav { text-align: left; }
 }
+
+/* ── Works grid card: fade with stagger ── */
+.work__card {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.work__card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Work hover overlay ── */
+.work__img {
+  position: relative;
+  overflow: hidden;
+}
+.work__hover-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(44,44,44,0.72);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.work__card:hover .work__hover-overlay {
+  opacity: 1;
+}
+.work__overlay-title {
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: #fff;
+  line-height: 1.5;
+}
+.work__overlay-meta {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.7);
+  margin-top: 4px;
+}
+
+/* ── Hero caption transition ── */
+.hero__caption {
+  will-change: transform;
+}
+
+/* ── Mobile menu slide in ── */
+.mobile-menu {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.mobile-menu.is-open {
+  opacity: 1;
+}

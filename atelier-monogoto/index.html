@@ -325,14 +325,14 @@
   </footer>
 
   <script>
-    // Scroll nav
+    /* ── Nav scroll ── */
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('nav--scrolled', window.scrollY > 40);
-    });
+    }, { passive: true });
 
-    // Mobile menu
-    const hamburger = document.getElementById('hamburger');
+    /* ── Mobile menu ── */
+    const hamburger  = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
     const mobileClose = document.getElementById('mobileClose');
 
@@ -342,7 +342,46 @@
       link.addEventListener('click', () => mobileMenu.classList.remove('is-open'));
     });
 
-    // Fade in on scroll
+    /* ── Hero parallax on scroll ── */
+    const heroCaption = document.querySelector('.hero__caption');
+    if (heroCaption) {
+      window.addEventListener('scroll', () => {
+        heroCaption.style.transform = `translateY(${window.scrollY * 0.18}px)`;
+      }, { passive: true });
+    }
+
+    /* ── Works grid stagger ── */
+    const worksGrid = document.querySelector('.works__grid');
+    if (worksGrid) {
+      const cards = worksGrid.querySelectorAll('.work__card');
+      const gridObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            cards.forEach((card, i) => {
+              card.style.transitionDelay = `${i * 0.08}s`;
+              setTimeout(() => card.classList.add('is-visible'), i * 80);
+            });
+            gridObserver.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.05 });
+      gridObserver.observe(worksGrid);
+    }
+
+    /* ── Work card hover overlay ── */
+    document.querySelectorAll('.work__card').forEach(card => {
+      const overlay = document.createElement('div');
+      overlay.className = 'work__hover-overlay';
+      const titleEl = card.querySelector('.work__title');
+      const metaEl  = card.querySelector('.work__meta');
+      overlay.innerHTML = `
+        <p class="work__overlay-title">${titleEl ? titleEl.textContent : ''}</p>
+        <p class="work__overlay-meta">${metaEl ? metaEl.textContent : ''}</p>
+      `;
+      card.querySelector('.work__img').appendChild(overlay);
+    });
+
+    /* ── Fade in ── */
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -351,7 +390,6 @@
         }
       });
     }, { threshold: 0.08 });
-
     document.querySelectorAll('.fade').forEach(el => observer.observe(el));
   </script>
 </body>

@@ -363,13 +363,79 @@
   </footer>
 
   <script>
+    /* ── Nav scroll ── */
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('nav--scrolled', window.scrollY > 60);
-    });
+    }, { passive: true });
 
+    /* ── Mobile hamburger ── */
+    const hamburger = document.querySelector('.nav__hamburger');
+    const navLinks  = document.querySelector('.nav__links');
+    hamburger.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('nav__links--open');
+      hamburger.setAttribute('aria-expanded', open);
+    });
+    if (navLinks) {
+      navLinks.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => navLinks.classList.remove('nav__links--open'));
+      });
+    }
+
+    /* ── Scroll progress bar ── */
+    const scrollBar = document.querySelector('.hero__scroll-bar');
+    if (scrollBar) {
+      const updateBar = () => {
+        const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+        scrollBar.style.width = Math.min(pct, 100) + '%';
+      };
+      window.addEventListener('scroll', updateBar, { passive: true });
+    }
+
+    /* ── Counter animation ── */
+    function countUp(el) {
+      const raw = el.childNodes[0].textContent.trim();
+      const target = parseFloat(raw);
+      if (isNaN(target)) return;
+      const small = el.querySelector('small');
+      const suffix = small ? small.textContent : '';
+      const duration = 1200;
+      const start = performance.now();
+      const isInt = Number.isInteger(target);
+      const step = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        const val = isInt ? Math.round(target * ease) : (target * ease).toFixed(1);
+        el.innerHTML = `${val}<small>${suffix}</small>`;
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          countUp(e.target);
+          counterObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.metric__num').forEach(el => counterObserver.observe(el));
+
+    /* ── Fade-in with stagger ── */
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('is-visible'); });
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const siblings = Array.from(
+            e.target.parentElement.querySelectorAll('.fade')
+          ).filter(el => !el.classList.contains('is-visible'));
+          siblings.forEach((el, i) => {
+            setTimeout(() => el.classList.add('is-visible'), i * 90);
+          });
+          e.target.classList.add('is-visible');
+          observer.unobserve(e.target);
+        }
+      });
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade').forEach(el => observer.observe(el));
   </script>

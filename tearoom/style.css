@@ -833,3 +833,34 @@ ul { list-style: none; }
   .difference__roles { flex-direction: column; align-items: flex-start; }
   .footer__inner { flex-direction: column; gap: 32px; }
 }
+
+/* ── Mobile nav open ── */
+@media (max-width: 768px) {
+  .nav__links--open {
+    display: flex !important;
+    flex-direction: column;
+    position: fixed;
+    inset: 0;
+    background: #faf8f5;
+    padding: 80px 40px 40px;
+    gap: 28px;
+    z-index: 90;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav__links--open a {
+    font-size: 20px;
+    color: #2d4a3e;
+    letter-spacing: 0.12em;
+    font-family: "Noto Serif JP", serif;
+  }
+}
+
+/* ── Circle breathing ── */
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50%       { transform: scale(1.06); opacity: 1; }
+}
+.hero__circle.is-breathing {
+  animation: breathe 4s ease-in-out infinite;
+}

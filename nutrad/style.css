@@ -643,3 +643,47 @@ ul { list-style: none; }
   .section { padding: 80px 0; }
   .menu-overlay__link { font-size: 28px; }
 }
+
+/* ── Custom cursor ── */
+* { cursor: none !important; }
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  will-change: transform;
+}
+.cursor-dot {
+  width: 4px;
+  height: 4px;
+  background: #111;
+  border-radius: 50%;
+  margin: -2px 0 0 -2px;
+  transition: opacity 0.2s;
+}
+.cursor-ring {
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(17,17,17,0.5);
+  border-radius: 50%;
+  margin: -14px 0 0 -14px;
+  transition: width 0.25s, height 0.25s, border-color 0.25s, margin 0.25s;
+}
+.cursor-ring.is-hover {
+  width: 48px;
+  height: 48px;
+  margin: -24px 0 0 -24px;
+  border-color: #111;
+}
+
+/* ── Menu link stagger ── */
+.menu-overlay__link {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.4s ease, transform 0.4s ease, color 0.2s;
+}
+.menu-overlay__link.is-in {
+  opacity: 1;
+  transform: translateY(0);
+}

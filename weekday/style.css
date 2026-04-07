@@ -799,3 +799,61 @@ ul { list-style: none; }
   .footer__inner { flex-direction: column; gap: 32px; }
   .footer__nav { gap: 20px; }
 }
+
+/* ── Mobile nav open ── */
+@media (max-width: 768px) {
+  .nav__links--open {
+    display: flex !important;
+    flex-direction: column;
+    position: fixed;
+    inset: 0;
+    background: #111;
+    padding: 80px 40px 40px;
+    gap: 32px;
+    z-index: 90;
+  }
+  .nav__links--open a {
+    font-size: 22px;
+    color: #fff;
+    letter-spacing: 0.04em;
+  }
+  .nav__links--open .nav__cta {
+    border-color: #fff;
+    color: #fff;
+  }
+}
+
+/* ── Word reveal ── */
+.word-reveal {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+.word-reveal span {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.word-reveal span.is-in {
+  transform: translateY(0);
+}
+
+/* ── Scroll line grow ── */
+.hero__scroll-line.is-animated {
+  height: 64px !important;
+  transition: height 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── Active nav link ── */
+.nav__links a.is-active { color: #111111; }
+
+/* ── Line reveal animation ── */
+@keyframes lineUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.line-reveal {
+  display: inline-block;
+  opacity: 0;
+  animation: lineUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
