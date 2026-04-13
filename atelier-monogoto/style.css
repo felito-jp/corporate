@@ -188,14 +188,15 @@ img { display: block; width: 100%; }
   font-weight: 300;
   line-height: 1.2;
   letter-spacing: 0.08em;
-  color: var(--color-text);
+  color: #ffffff;
   font-feature-settings: "palt" 1, "kern" 1;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
 }
 .hero__caption-sub {
   margin-top: var(--space-xs);
   font-size: 12px;
   letter-spacing: 0.12em;
-  color: var(--color-secondary);
+  color: rgba(255,255,255,0.75);
 }
 
 /* ── Section Base ── */
