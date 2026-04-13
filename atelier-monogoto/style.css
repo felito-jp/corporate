@@ -529,6 +529,103 @@ img { display: block; width: 100%; }
   margin-bottom: var(--space-l);
 }
 
+/* ── Contact Page ── */
+.contact-page__hero {
+  padding: 120px 0 var(--space-s);
+}
+
+.contact-page__title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  margin: var(--space-xs) 0 var(--space-m);
+}
+
+.contact-page__lead {
+  font-size: 14px;
+  line-height: 2.0;
+  color: var(--color-secondary);
+  max-width: 560px;
+}
+
+.nav__link--active {
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+}
+
+/* ── Contact Form ── */
+.contact__form {
+  text-align: left;
+  margin-top: var(--space-l);
+}
+
+.form__group {
+  margin-bottom: var(--space-m);
+}
+
+.form__label {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--color-secondary);
+  margin-bottom: 6px;
+}
+
+.form__required {
+  color: #a0522d;
+}
+
+.form__input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-border, #d0ccc6);
+  padding: 8px 0;
+  font-size: 15px;
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.form__input:focus {
+  border-bottom-color: var(--color-text);
+}
+
+.form__input::placeholder {
+  color: #b8b4ae;
+}
+
+.form__textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form__submit {
+  margin-top: var(--space-m);
+  cursor: pointer;
+  background: none;
+  font-family: var(--font-sans);
+  width: 100%;
+}
+
+.form__thanks {
+  margin-top: var(--space-m);
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--color-secondary);
+  text-align: center;
+}
+
+.form__error {
+  margin-top: var(--space-s);
+  font-size: 13px;
+  color: #a0522d;
+  text-align: center;
+}
+
 .btn {
   display: inline-block;
   font-size: 13px;
